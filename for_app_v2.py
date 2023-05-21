@@ -8,7 +8,6 @@ import numpy as np
 import altair as alt
 import requests
 import ast
-import azure
 import matplotlib.pyplot as plt
 
 
