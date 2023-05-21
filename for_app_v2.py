@@ -8,7 +8,7 @@ import numpy as np
 import altair as alt
 import requests
 import ast
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 
 #Main page interface
@@ -40,10 +40,10 @@ df = df.drop(columns="Unnamed: 0")
     #st.dataframe(df.head())
 
 
-fig, ax = plt.subplots()
-ax.hist(df['TARGET'], bins=20)
+#fig, ax = plt.subplots()
+#ax.hist(df['TARGET'], bins=20)
 
-st.pyplot(fig)
+#st.pyplot(fig)
 #json_data = json.dumps(json_data)
 #df = pd.read_json(json_data)
 categorical_columns = [col for col in df.columns if df[col].dtype == 'object']
