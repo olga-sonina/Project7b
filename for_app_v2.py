@@ -19,7 +19,7 @@ st.title('Home Credit App')
 #csv_url = 'https://github.com/olga-sonina/Project7/blob/c4697ffb89de47c603d0165a67270c2710a75060/cleaned1000.csv'
 
 # Function to fetch and load CSV data
-@st.cache_data
+#@st.cache_data
 def load_data(csv_url):
     try:
         # Fetch CSV data from URL
