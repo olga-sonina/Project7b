@@ -8,7 +8,7 @@ import numpy as np
 import altair as alt
 import requests
 import ast
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 
 #Main page interface
@@ -36,10 +36,10 @@ df=df.drop(columns="Unnamed: 0")
 if df is not None:
     st.dataframe(df.head())
 
-fig, ax = plt.subplots()
-ax.hist(df['TARGET'], bins=20)
+#fig, ax = plt.subplots()
+#ax.hist(df['TARGET'], bins=20)
 
-st.pyplot(fig)
+#st.pyplot(fig)
 
 categorical_columns = [col for col in df.columns if df[col].dtype == 'object']
 df=df.drop(columns=categorical_columns)
