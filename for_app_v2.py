@@ -16,21 +16,21 @@ st.title('Home Credit App')
 
 
 # GitHub CSV file URL
-csv_url = 'https://github.com/olga-sonina/Project7/blob/c4697ffb89de47c603d0165a67270c2710a75060/cleaned1000.csv'
+#csv_url = 'https://github.com/olga-sonina/Project7/blob/c4697ffb89de47c603d0165a67270c2710a75060/cleaned1000.csv'
 
 # Function to fetch and load CSV data
 @st.cache_data
-def load_data():
+def load_data(csv_url):
     try:
         # Fetch CSV data from URL
-        df = pd.read_csv(csv_url)
-        return df
+        csv_url = csv_url.replace("/edit#gid=", "/export?format=csv&gid=")
+        return pd.read_csv(csv_url)
     except Exception as e:
         st.error(f"Error: {e}")
         return None
 
 # Load CSV data
-df = load_data()
+df = load_data(st.secrets["csv_url"])
 df=df.drop(columns="Unnamed: 0")
 # Display the DataFrame in Streamlit app
 if df is not None:
@@ -73,7 +73,7 @@ def calc_client(option):
     data = ast.literal_eval(inputs)
     body = str.encode(json.dumps(data))
 
-    url = 'http://d2b1f5a8-29cc-4b8d-8a28-165d9f2404d9.francecentral.azurecontainer.io/score'
+    url = st.secrets["az_url"]
 
 
     headers = {'Content-Type':'application/json'}
