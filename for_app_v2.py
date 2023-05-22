@@ -8,7 +8,24 @@ import numpy as np
 import altair as alt
 import requests
 import ast
-import plotly.express as px
+
+from pathlib import Path
+
+import setuptools
+from setuptools.command.install import install
+
+THIS_DIRECTORY = Path(__file__).parent
+
+VERSION = "1.22.0"  # PEP-440
+
+NAME = "streamlit"
+
+# IMPORTANT: We should try very hard *not* to add dependencies to Streamlit.
+# And if you do add one, make the required version as general as possible:
+# - Include relevant lower bound for any features we use from our dependencies
+# - And include an upper bound that's < NEXT_MAJOR_VERSION
+INSTALL_REQUIRES = [
+"plotly"]
 
 
 #import matplotlib.pyplot as plt
@@ -17,7 +34,7 @@ import plotly.express as px
 #Main page interface
 st.title('Home Credit App')
 
-
+import plotly.express as px
 
 # GitHub raw CSV file URL
 csv_url = 'https://raw.githubusercontent.com/olga-sonina/Project7/c4697ffb89de47c603d0165a67270c2710a75060/cleaned1000.csv'
