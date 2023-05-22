@@ -8,7 +8,8 @@ import numpy as np
 import altair as alt
 import requests
 import ast
-
+import os
+import sys
 from pathlib import Path
 
 import setuptools
@@ -25,7 +26,8 @@ NAME = "streamlit"
 # - Include relevant lower bound for any features we use from our dependencies
 # - And include an upper bound that's < NEXT_MAJOR_VERSION
 INSTALL_REQUIRES = [
-"plotly"]
+"plotly",
+"plotly.express"]
 
 
 #import matplotlib.pyplot as plt
@@ -33,7 +35,7 @@ INSTALL_REQUIRES = [
 
 #Main page interface
 st.title('Home Credit App')
-
+import plotly
 import plotly.express as px
 
 # GitHub raw CSV file URL
