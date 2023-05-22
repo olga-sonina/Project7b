@@ -8,6 +8,9 @@ import numpy as np
 import altair as alt
 import requests
 import ast
+import plotly.express as px
+
+
 #import matplotlib.pyplot as plt
 
 
@@ -35,6 +38,7 @@ df = load_data()
 # Drop the 'Unnamed: 0' column
 df = df.drop(columns="Unnamed: 0")
 
+
 # Display the DataFrame in Streamlit app
 #if df is not None:
     #st.dataframe(df.head())
@@ -53,10 +57,28 @@ df=df.dropna()
 y=df['TARGET'].astype('float')
 X = df.drop(columns=['TARGET','index']).astype('float')
 #X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
+param_list=X.columns.tolist()
 
-client_list=['Client1', 'Client2', 'Client3','Client4','Client5', 'Client6']
+param_opt_x=st.selectbox('Choose a parameter x',param_list)
+param_opt_y=st.selectbox('Choose a parameter y',param_list)
+fig = px.scatter(
+    data_frame=df,
+    x=df[param_opt_x],
+    y=df[param_opt_y],
+    color=df["TARGET"]
+    #title="Records to Highlight"
+)
+st.plotly_chart(fig)
 
+
+#Client section
+
+lst = list(range(1,len(y)-1))
+list_string = map(str, lst)
+client_list = ['Client'+ x  for x in list_string]
 option = st.selectbox('Choose a client',client_list)
+n_client=client_list.index(option)
+st.write(X.iloc[[n_client]])
 
 
 def allowSelfSignedHttps(allowed):
@@ -99,5 +121,5 @@ def calc_client(option):
         st.write(error.info())
         st.write(error.read().decode("utf8", 'ignore'))
 
-calc_client(option)
+#calc_client(option)
 
