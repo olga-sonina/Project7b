@@ -88,11 +88,7 @@ allowSelfSignedHttps(True) # this line is needed if you use self-signed certific
 def calc_client(option):
     n_client=client_list.index(option)
     inputs=X.iloc[[n_client]].to_json(orient="split")
-    # Request data goes here
-    # The example below assumes JSON formatting which may be updated
-    # depending on the format your endpoint expects.
-    # More information can be found here:
-    # https://docs.microsoft.com/azure/machine-learning/how-to-deploy-advanced-entry-script
+  
 
     data = ast.literal_eval(inputs)
     body = str.encode(json.dumps(data))
