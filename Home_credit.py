@@ -5,8 +5,7 @@ st.write("# Home credit App")
 
 st.markdown(
     """
-    Streamlit is an open-source app framework built specifically for
-    Machine Learning and Data Science projects."""
+   """
 
     )
 
