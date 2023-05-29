@@ -44,13 +44,33 @@ df=df.dropna()
 #st.dataframe(df.head())
 y=df['TARGET'].astype('float')
 X = df.drop(columns=['TARGET','index']).astype('float')
-#Dataset
-st.subheader('Dataset general information: ')
-st.write('Number of clients: 307511')
-st.write('Number of parameters: 163')
-st.write('Missing values rate after cleansing: 0.24395941907129431',
-    'Duplicated lines: 0')
 
+with st.container():
+    col1,col2=st.columns(2)
+    with col1:
+        #Dataset
+        st.subheader('Dataset general information: ')
+        st.write('Number of clients: 307511')
+        st.write('Number of parameters: 163')
+        st.write('Missing values rate after cleansing: 0.24395941907129431')
+        st.write('Duplicated lines: 0')
+
+        # # Show histogram of TARGET
+        # fig, ax = plt.subplots()
+        # ax.hist(df['TARGET'], bins=20)
+        # st.pyplot(fig)
+
+    with col2:
+        # Count the frequency of each unique value in the 'TARGET' column
+        value_counts = df['TARGET'].value_counts()
+
+        # Pie chart
+        fig, ax = plt.subplots()
+        ax.pie(value_counts, labels=value_counts.index, autopct='%1.1f%%')
+        ax.set_aspect('equal')  # Ensure the pie chart is circular
+        ax.set_title('Distribution of TARGET')
+        plt.show()
+        st.pyplot(fig)
 
 st.subheader('Explore distribution of variables and their correlations')
 #Construct graph
@@ -68,12 +88,6 @@ st.plotly_chart(fig)
 
 
 
-#st.pyplot(fig)
-
-# Show histogram of TARGET
-#fig, ax = plt.subplots()
-#ax.hist(df['TARGET'], bins=20)
-#st.pyplot(fig)
 
 
 #Client section
