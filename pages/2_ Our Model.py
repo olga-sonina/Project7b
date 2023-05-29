@@ -74,9 +74,6 @@ try:
 except Exception as e:
     st.write(f"Error loading SHAP values: {e}")
 
-
-
-
 #SHAP
 st.subheader(
     "SHAP values for a particular client"

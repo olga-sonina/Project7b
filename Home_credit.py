@@ -117,4 +117,3 @@ if agree:
     fig = shap.force_plot(expected_value[n_client], shap_values[0][n_client], X.iloc[n_client,:], matplotlib=True)
     # Display the plot
     st.pyplot(fig)
-

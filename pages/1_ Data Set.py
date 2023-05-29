@@ -52,9 +52,6 @@ st.write('Missing values rate after cleansing: 0.24395941907129431',
     'Duplicated lines: 0')
 
 
-
-
-
 st.subheader('Explore distribution of variables and their correlations')
 #Construct graph
 param_list=X.columns.tolist()
