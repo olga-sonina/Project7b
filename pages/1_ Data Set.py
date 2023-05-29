@@ -52,7 +52,7 @@ with st.container():
         st.subheader('Dataset general information: ')
         st.write('Number of clients: 307511')
         st.write('Number of parameters: 163')
-        st.write('Missing values rate after cleansing: 0.24395941907129431')
+        st.write('Missing values rate: 0.24395941907129431')
         st.write('Duplicated lines: 0')
 
         # # Show histogram of TARGET
