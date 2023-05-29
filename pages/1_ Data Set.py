@@ -13,15 +13,13 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 import shap
 import pickle
+import warnings
+warnings.filterwarnings("ignore")
 
-
-
-#Main page interface
-st.title('Home Credit App')
 
 
 # GitHub raw CSV file URL
-csv_url = 'https://raw.githubusercontent.com/olga-sonina/Project7/c4697ffb89de47c603d0165a67270c2710a75060/cleaned1000.csv'
+csv_url ='https://raw.githubusercontent.com/olga-sonina/for_a/a98e78a19b3af564fb92823d61366d6c86e079b2/cleaned1000.csv'
 
 # Function to fetch and load CSV data
 @st.cache
@@ -46,18 +44,32 @@ df=df.dropna()
 #st.dataframe(df.head())
 y=df['TARGET'].astype('float')
 X = df.drop(columns=['TARGET','index']).astype('float')
+#Dataset
+st.subheader('Dataset general information: ')
+st.write('Number of clients: 307511')
+st.write('Number of parameters: 163')
+st.write('Missing values rate after cleansing: 0.24395941907129431',
+    'Duplicated lines: 0')
 
 
-## Load the SHAP values
 
-try:
-    with open("shap_values.pkl", "rb") as f:
-        shap_values = pickle.load(f)
-except Exception as e:
-    print(f"Error loading SHAP values: {e}")
 
-#st.set_option('deprecation.showPyplotGlobalUse', False)
-#fig=shap.summary_plot(shap_values[1], X_test)
+
+st.subheader('Explore distribution of variables and their correlations')
+#Construct graph
+param_list=X.columns.tolist()
+param_opt_x=st.selectbox('Choose parameter x',param_list, index=5)
+param_opt_y=st.selectbox('Choose parameter y',param_list, index=11)
+fig = px.scatter(
+    data_frame=df,
+    x=df[param_opt_x],
+    y=df[param_opt_y],
+    color=df["TARGET"]
+    #title=""
+)
+st.plotly_chart(fig)
+
+
 
 #st.pyplot(fig)
 
@@ -66,10 +78,6 @@ except Exception as e:
 #ax.hist(df['TARGET'], bins=20)
 #st.pyplot(fig)
 
-#Feature importances
-
-
-#SHAP
 
 #Client section
 
@@ -78,7 +86,22 @@ list_string = map(str, lst)
 client_list = ['Client'+ x  for x in list_string]
 option = st.selectbox('Choose a client',client_list)
 n_client=client_list.index(option)
-st.write(X.iloc[[n_client]])
+agree = st.checkbox("Show details")
+
+if agree:
+    st.write(X.iloc[[n_client]])
+
+
+
+mean_client=X.mean(axis=0)
+
+chart_data = pd.DataFrame(
+    mean_client,
+    columns=['mean_client'])
+new_client=X.iloc[n_client,:]
+chart_data['Client']=new_client
+
+st.line_chart(chart_data)
 
 
 def allowSelfSignedHttps(allowed):
