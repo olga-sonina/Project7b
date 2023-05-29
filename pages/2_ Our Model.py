@@ -67,10 +67,10 @@ st.dataframe(feat_imp.sort_values(by='importance', ascending=False)[0:10])
 #plt.tight_layout()
 #st.pyplot(fig)
 
-shaps="https://raw.githubusercontent.com/olga-sonina/Project7b/f765ca7f25a93986ced34b499db58dedc1e68e36/shap_values.pkl"
+
 
 try:
-    with open(shaps, "rb") as f:
+    with open(shap_values.pkl, "rb") as f:
         shap_values = pickle.load(f)
 except Exception as e:
     st.write(f"Error loading SHAP values: {e}")
