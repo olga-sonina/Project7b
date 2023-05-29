@@ -97,7 +97,7 @@ def calc_client(option):
 #calc_client(option)
 
 if st.button('Predict'):
-	#calc_client(option)
+	calc_client(option)
     #st.write(option)
 
 #add checkbox
