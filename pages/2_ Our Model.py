@@ -70,7 +70,7 @@ st.dataframe(feat_imp.sort_values(by='importance', ascending=False)[0:10])
 
 
 try:
-    with open(shap_values.pkl, "rb") as f:
+    with open("shap_values.pkl", "rb") as f:
         shap_values = pickle.load(f)
 except Exception as e:
     st.write(f"Error loading SHAP values: {e}")
