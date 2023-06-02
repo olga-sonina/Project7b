@@ -79,7 +79,8 @@ def calc_client(option):
 
     data = ast.literal_eval(inputs)
     body = str.encode(json.dumps(data))
-    url = "http://d2b1f5a8-29cc-4b8d-8a28-165d9f2404d9.francecentral.azurecontainer.io/score"
+    url ="http://87bebc25-31ea-41df-bb5f-f908d5a42059.francecentral.azurecontainer.io/score"
+    #url = "http://d2b1f5a8-29cc-4b8d-8a28-165d9f2404d9.francecentral.azurecontainer.io/score"
     headers = {'Content-Type':'application/json'}
     req = urllib.request.Request(url, body, headers)
 
