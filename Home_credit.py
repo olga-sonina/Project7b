@@ -116,7 +116,7 @@ client_g=client_group(resp, threshold)
 
 if st.button('Predict'):
    #calc_client(option)
-   st.write("score: ", resp)
+   st.write("Score: ", resp)
    st.write("Current threshold: ", threshold)
    st.write("Client's group: ", client_g)
    if resp>threshold:
