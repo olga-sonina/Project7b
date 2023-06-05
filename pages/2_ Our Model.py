@@ -75,79 +75,16 @@ try:
 except Exception as e:
     st.write(f"Error loading SHAP values: {e}")
 
-#SHAP
-st.subheader(
-    "SHAP values for a particular client"
-
-    )
-#Client section
-
-lst = list(range(1,len(y)-1))
-list_string = map(str, lst)
-client_list = ['Client'+ x  for x in list_string]
-option = st.selectbox('Choose a client',client_list)
-n_client=client_list.index(option)
-agree = st.checkbox("Show details")
-if agree:
-    st.write(X.iloc[[n_client]])
-# Plot Waterfall Plot
-st.write('SHAP values: ')
-expected_value = shap_values[0].mean(axis=1)
-st.set_option('deprecation.showPyplotGlobalUse', False)
-fig = shap.force_plot(expected_value[n_client], shap_values[0][n_client], X.iloc[n_client,:], matplotlib=True)
-
-# Display the plot
-
-st.pyplot(fig)
-
 
 
 
 st.subheader('SHAP values of LGBM classifier model for the entire dataset')
+st.write("By examining the SHAP values, one can determine which features have the greatest influence on the prediction.",
+ "For example, if most of the data points have high positive SHAP values for the 'INCOME' feature, it suggests that higher income has a more significant contribution to increasing the predicted probability of loan approval.",
+ " This implies that 'INCOME' plays a crucial role in determining the loan approval decision according to the model.")
+
+
+
 st.set_option('deprecation.showPyplotGlobalUse', False)
 fig1=shap.summary_plot(shap_values[0], X,cmap = "plasma")
 st.pyplot(fig1)
-
-# Show histogram of TARGET
-#fig, ax = plt.subplots()
-#ax.hist(df['TARGET'], bins=20)
-#st.pyplot(fig)
-
-#Feature importances
-
-
-
-# def allowSelfSignedHttps(allowed):
-#     # bypass the server certificate verification on client side
-#     if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
-#         ssl._create_default_https_context = ssl._create_unverified_context
-
-# allowSelfSignedHttps(True) # this line is needed if you use self-signed certificate in your scoring service.
-
-# def calc_client(option):
-#     n_client=client_list.index(option)
-#     inputs=X.iloc[[n_client]].to_json(orient="split")
-#     # Request data goes here
-#     # The example below assumes JSON formatting which may be updated
-#     # depending on the format your endpoint expects.
-#     # More information can be found here:
-#     # https://docs.microsoft.com/azure/machine-learning/how-to-deploy-advanced-entry-script
-
-#     data = ast.literal_eval(inputs)
-#     body = str.encode(json.dumps(data))
-#     url = "http://d2b1f5a8-29cc-4b8d-8a28-165d9f2404d9.francecentral.azurecontainer.io/score"
-#     headers = {'Content-Type':'application/json'}
-#     req = urllib.request.Request(url, body, headers)
-
-#     try:
-#         response = urllib.request.urlopen(req)
-#         result = response.read()
-#         st.write(result.decode("utf-8") )
-#     except urllib.error.HTTPError as error:
-#         st.write("The request failed with status code: " + str(error.code))
-#         # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
-#         st.write(error.info())
-#         st.write(error.read().decode("utf8", 'ignore'))
-
-# #calc_client(option)
-
