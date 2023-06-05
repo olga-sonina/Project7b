@@ -24,21 +24,25 @@ st.markdown(
     """
     A tool predicting client's capacity to repay a loan."""
 
-    )# GitHub raw CSV file URL
+    )
 csv_url ="https://raw.githubusercontent.com/olga-sonina/for_a/a98e78a19b3af564fb92823d61366d6c86e079b2/cleaned1000.csv"
+#https://github.com/olga-sonina/Project7/blob/cd489dd49856aee31b41230781f1c404dca7e60f/cleaned1000.csv
+
 
 # Function to fetch and load CSV data
 @st.cache
-def load_data():
+def load_data(csv):
     try:
         # Fetch CSV data from URL
-        return pd.read_csv(csv_url)
+        return pd.read_csv(csv)
     except Exception as e:
         st.error(f"Error: {e}")
         return None
 
 # Load CSV data
-df = load_data()
+df = load_data(csv_url)
+cl_csv="https://raw.githubusercontent.com/olga-sonina/for_a/2d1fb07371af7d3ce791f31d909a6640ae82a015/clients.csv"
+df_c=load_data(cl_csv)
 # Drop the 'Unnamed: 0' column
 df = df.drop(columns="Unnamed: 0")
 # Display the DataFrame in Streamlit app
@@ -59,8 +63,6 @@ option = st.selectbox('Choose a client',client_list)
 n_client=client_list.index(option)
 
 
-
-
 def allowSelfSignedHttps(allowed):
     # bypass the server certificate verification on client side
     if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
@@ -79,8 +81,8 @@ def calc_client(option):
 
     data = ast.literal_eval(inputs)
     body = str.encode(json.dumps(data))
-    url ="http://87bebc25-31ea-41df-bb5f-f908d5a42059.francecentral.azurecontainer.io/score"
     #url = "http://d2b1f5a8-29cc-4b8d-8a28-165d9f2404d9.francecentral.azurecontainer.io/score"
+    url="https://my-workspace-dep-bhebh.francecentral.inference.ml.azure.com/score"
     headers = {'Content-Type':'application/json'}
     req = urllib.request.Request(url, body, headers)
 
@@ -95,10 +97,34 @@ def calc_client(option):
         st.write(error.read().decode("utf8", 'ignore'))
 
 #calc_client(option)
+resp=df_c.iloc[n_client].loc['0']#predicted probability to 0 class (approved loan class)
+print("Score of client: ",resp)
+threshold=0.83 #threshold found by cout-metier function
+def client_group(resp, threshold):
+    if resp <0.6:
+        client_group="Not approved"
+    if (resp >0.6) & (resp<threshold):
+        client_group="Potentially could be approved with improved parameters"
+    if (resp>threshold) & (resp<0.99):
+        client_group="Likely approved"
+    if resp>0.99:
+        client_group="Approved, no-risk clients"
+        
+    return client_group
+
+client_g=client_group(resp, threshold)
 
 if st.button('Predict'):
-	calc_client(option)
-    	#st.write(option)
+   #calc_client(option)
+   st.write("score: ", resp)
+   st.write("Current threshold: ", threshold)
+   st.write("Client's group: ", client_g)
+   if resp>threshold:
+       st.write("Congrats, loan approved! ")
+   else:
+       st.write("Loan declined. Look at the client's statistics to identify parameters for improvement compared to other clients in their group")
+
+
 
 #add checkbox
 agree = st.checkbox("Show details")
@@ -117,3 +143,4 @@ if agree:
     fig = shap.force_plot(expected_value[n_client], shap_values[0][n_client], X.iloc[n_client,:], matplotlib=True)
     # Display the plot
     st.pyplot(fig)
+    st.write("By examining the SHAP values, one can determine which features have the greatest influence on the prediction for the chosen client. Positive SHAP values (red) indicate features that increase the score, while negative values (blue) indicate features that decrease it.")
