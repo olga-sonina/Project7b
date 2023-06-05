@@ -20,21 +20,34 @@ warnings.filterwarnings("ignore")
 
 # GitHub raw CSV file URL
 csv_url ='https://raw.githubusercontent.com/olga-sonina/for_a/a98e78a19b3af564fb92823d61366d6c86e079b2/cleaned1000.csv'
-
 # Function to fetch and load CSV data
+cl_csv="https://raw.githubusercontent.com/olga-sonina/for_a/2d1fb07371af7d3ce791f31d909a6640ae82a015/clients.csv"
 @st.cache
-def load_data():
+def load_data(csv):
     try:
         # Fetch CSV data from URL
-        return pd.read_csv(csv_url)
+        return pd.read_csv(csv)
     except Exception as e:
         st.error(f"Error: {e}")
         return None
 
 # Load CSV data
-df = load_data()
-# Drop the 'Unnamed: 0' column
-df = df.drop(columns="Unnamed: 0")
+df = load_data(csv_url)
+df = df.drop(columns="Unnamed: 0")# Drop the 'Unnamed: 0' column
+df_c=load_data(cl_csv).drop(columns="Unnamed: 0").iloc[:,0].values
+
+def find_indices(lst, condition):
+    return [i for i, elem in enumerate(lst) if condition(elem)]
+
+group_0=find_indices(df_c, lambda e: e <0.6)
+group_1=find_indices(df_c, lambda e: (e >0.6) & (e<0.83))
+group_2=find_indices(df_c, lambda e: (e >0.83) & (e<0.99))
+group_3=find_indices(df_c, lambda e: e>0.99)
+# group_0_mean=df.iloc[group_0].mean(axis=0)
+# group_1_mean=df.iloc[group_1].mean(axis=0)
+# group_2_mean=df.iloc[group_2].mean(axis=0)
+# group_3_mean=df.iloc[group_3].mean(axis=0)
+# st.write(df.iloc[group_0].mean(axis=0))
 # Display the DataFrame in Streamlit app
 #if df is not None:
     #st.dataframe(df.head())
@@ -99,16 +112,32 @@ option = st.selectbox('Choose a client',client_list)
 n_client=client_list.index(option)
 agree = st.checkbox("Show details")
 
+
+
 if agree:
     st.write(X.iloc[[n_client]])
 
 
+if n_client in group_0:
+    X_group=df.iloc[group_0]#.mean(axis=0)
+    st.write("Client's group: ",'Not allowed')
+if n_client in group_1:
+    X_group=df.iloc[group_1]#.mean(axis=0)
+    st.write("Client's group: ", "Potentially could be approved with improved parameters")
+if n_client in group_2:
+    X_group=df.iloc[group_2]#.mean(axis=0)
+    st.write("Client's group: ","Likely approved")
+if n_client in group_3:
+    X_group=df.iloc[group_3]#.mean(axis=0)
+    st.write("Client's group: ","Approved, no-risk clients")
+    
+    
 
-mean_client=X.mean(axis=0)
+mean_client=X_group.mean(axis=0)
 
 chart_data = pd.DataFrame(
     mean_client,
-    columns=['mean_client'])
+    columns=['mean_client_in_the group'])
 new_client=X.iloc[n_client,:]
 chart_data['Client']=new_client
 
@@ -148,4 +177,3 @@ def calc_client(option):
         st.write(error.read().decode("utf8", 'ignore'))
 
 #calc_client(option)
-
