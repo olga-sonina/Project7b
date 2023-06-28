@@ -25,7 +25,8 @@ st.markdown(
     A tool predicting client's capacity to repay a loan."""
 
     )
-csv_url ="https://raw.githubusercontent.com/olga-sonina/for_a/a98e78a19b3af564fb92823d61366d6c86e079b2/cleaned1000.csv"
+csv_url =st.secrets.urls.df
+"https://raw.githubusercontent.com/olga-sonina/for_a/a98e78a19b3af564fb92823d61366d6c86e079b2/cleaned1000.csv"
 #https://github.com/olga-sonina/Project7/blob/cd489dd49856aee31b41230781f1c404dca7e60f/cleaned1000.csv
 
 
