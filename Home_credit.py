@@ -39,7 +39,7 @@ def load_data(csv):
 
 # Load CSV data
 df = load_data(csv_url)
-cl_csv="https://raw.githubusercontent.com/olga-sonina/for_a/2d1fb07371af7d3ce791f31d909a6640ae82a015/clients.csv"
+cl_csv=st.secrets.urls.cl
 df_c=load_data(cl_csv)
 # Drop the 'Unnamed: 0' column
 df = df.drop(columns="Unnamed: 0")
