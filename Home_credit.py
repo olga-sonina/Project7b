@@ -26,9 +26,6 @@ st.markdown(
 
     )
 csv_url =st.secrets.urls.df
-#"https://raw.githubusercontent.com/olga-sonina/for_a/a98e78a19b3af564fb92823d61366d6c86e079b2/cleaned1000.csv"
-
-
 
 # Function to fetch and load CSV data
 @st.cache
