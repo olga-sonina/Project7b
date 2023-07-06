@@ -1,7 +1,10 @@
 Technical Note
+
 ![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.001.png)
 **Implementing the scoring model**
+
 ![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.001.png)
+
 Author : Olga Sonina
 
 
