@@ -21,7 +21,7 @@ Technical Note
 
 Author : Olga Sonina
 
-7**
+
 ![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.002.png)![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.003.png)
 
 # **Introduction**
