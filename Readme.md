@@ -46,7 +46,7 @@ In the dataset used for loan approval, the rate of negative decisions (rejected 
 
 
 
-![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.006.png)
+![](TechnicalNote/Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.006.png)
 
 Figure 3: Cout-metier function
 
@@ -57,7 +57,7 @@ In the function, the error weights were given to false positive error 10 times h
 
 
 
-![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.007.png)	![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.008.png)
+![](TechnicalNote/Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.007.png)	![](TechnicalNote/Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.008.png)
 
 
 Figure 4: 0.5 threshold result confusion matrix
@@ -92,7 +92,7 @@ Table 1: Log Loss and AUC-ROC Score
 |5|0\.23463|0\.23275|0\.74746|
 |0\.74228||||
 
-![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.009.png)
+![](TechnicalNote/Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.009.png)
 
 Figure 6: Feature importances
 
@@ -101,7 +101,7 @@ Based on the SHAP values (shap), we observe that high feature values of External
 
 
 
-![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.010.jpeg)
+![](TechnicalNote/Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.010.jpeg)
 
 Figure 7: Shap values
 
