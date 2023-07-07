@@ -35,7 +35,7 @@ The hyperparameters for LGBM classifier were tuned using RandomizedSearchCV, a r
 
 which partitions the dataset into multiple subsets for training and validation. The auc-roc scoring was employed to assess the model’s performance on each fold and obtain an overall evaluation of its predictive capability.
 
-![](Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.005.png)
+![](TechnicalNote/Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.005.png)
 
 Figure 2: Scoring while entertainment the model
 
