@@ -21,7 +21,7 @@ To construct the model the Home Credit Default Risk datasets [(https://www.kaggl
 
 
 
-![](pics/Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.004.jpeg)
+![](TechnicalNote/Aspose.Words.6320d53f-5bdf-43cf-9d46-5892b98b5b66.004.jpeg)
 
 <a name="_bookmark0"></a>Figure 1: Correlation between parameters and TARGET (first line).
 
